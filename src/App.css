@@ -65,7 +65,8 @@ button:hover {
   width: 80%;
   max-width: 300px;
   margin: 20px auto; /* Correct margin */
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;

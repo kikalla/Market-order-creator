@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 
-const ExcelForm = ({ onFileLoad, inputText }) => {
+const ExcelForm = ({ onFileLoad, inputText, setFileName }) => {
   const [file, setFile] = useState(null);
   const [formName, setFormName] = useState(inputText);
 
@@ -10,6 +10,7 @@ const ExcelForm = ({ onFileLoad, inputText }) => {
     if (file) {
       setFile(file);
       setFormName(file.name);
+      setFileName(file.name)
       readExcel(file);
     }
   };

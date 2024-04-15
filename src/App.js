@@ -7,8 +7,7 @@ const App = () => {
   const [form1Data, setForm1Data] = useState([]);
   const [form2Data, setForm2Data] = useState([]);
   const [mergedData, setMergedData] = useState([]);
-  const [form1FileName, setForm1FileName] = useState("აირჩიე ნაშთის ფაილი");
-  const [form2FileName, setForm2FileName] = useState("აირჩიე გაყიდვების ფაილი");
+  const [fileName, setFileName] = useState("Merged");
 
   const mergeArrays = (leftItems, soldItems) => {
     const map = new Map();
@@ -46,27 +45,33 @@ const App = () => {
       setMergedData(merged);
     }
   };
+const exportToExcel = () => {
+  const wb = XLSX.utils.book_new();
+  
+  // Modify the mergedData array to include the column names
+  const modifiedData = [
+    ["დასახელება", "რაოდენობა"],
+    ...mergedData,
+  ];
 
-  const exportToExcel = () => {
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(mergedData);
+  const ws = XLSX.utils.json_to_sheet(modifiedData);
 
-    // Calculate column widths
-    const colWidths = mergedData.reduce((acc, row) => {
-      Object.keys(row).forEach((key) => {
-        acc[key] = Math.max(acc[key] || 0, String(row[key]).length);
-      });
-      return acc;
-    }, {});
+  // Calculate column widths
+  const colWidths = modifiedData.reduce((acc, row) => {
+    Object.keys(row).forEach((key) => {
+      acc[key] = Math.max(acc[key] || 0, String(row[key]).length);
+    });
+    return acc;
+  }, {});
 
-    // Set column widths in the sheet
-    ws["!cols"] = Object.keys(colWidths).map((key) => ({
-      wch: colWidths[key],
-    }));
+  // Set column widths in the sheet
+  ws["!cols"] = Object.keys(colWidths).map((key) => ({
+    wch: colWidths[key],
+  }));
 
-    XLSX.utils.book_append_sheet(wb, ws, "Merged Data");
-    XLSX.writeFile(wb, "merged_data.xlsx");
-  };
+  XLSX.utils.book_append_sheet(wb, ws, "Merged Data");
+  XLSX.writeFile(wb, `${fileName}`);
+};
 
   return (
     <div className="form-wrapper">
@@ -77,6 +82,7 @@ const App = () => {
         <ExcelForm
           onFileLoad={setForm1Data}
           inputText={"აირჩიე ნაშთის ფაილი"}
+          setFileName={setFileName}
         />
       </div>
 
@@ -85,6 +91,7 @@ const App = () => {
         <ExcelForm
           onFileLoad={setForm2Data}
           inputText={"აირჩიე გაყიდულის ფაილი"}
+          setFileName={setFileName}
         />
       </div>
 
