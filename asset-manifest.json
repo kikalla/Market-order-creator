@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Market-order-creator/static/css/main.ff44b82c.css",
+    "main.js": "/Market-order-creator/static/js/main.4f519852.js",
+    "static/js/453.c44ba6b3.chunk.js": "/Market-order-creator/static/js/453.c44ba6b3.chunk.js",
+    "index.html": "/Market-order-creator/index.html",
+    "main.ff44b82c.css.map": "/Market-order-creator/static/css/main.ff44b82c.css.map",
+    "main.4f519852.js.map": "/Market-order-creator/static/js/main.4f519852.js.map",
+    "453.c44ba6b3.chunk.js.map": "/Market-order-creator/static/js/453.c44ba6b3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ff44b82c.css",
+    "static/js/main.4f519852.js"
+  ]
+}
