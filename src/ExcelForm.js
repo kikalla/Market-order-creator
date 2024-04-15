@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 
 const ExcelForm = ({ onFileLoad, inputText, setFileName }) => {
-  const [file, setFile] = useState(null);
   const [formName, setFormName] = useState(inputText);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFile(file);
       setFormName(file.name);
       setFileName(file.name)
       readExcel(file);
